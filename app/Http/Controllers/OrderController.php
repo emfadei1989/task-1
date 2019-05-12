@@ -72,9 +72,17 @@ class OrderController extends Controller
     {
         $partners = Partner::all();
         $statuses = Order::STATUS;
+        $histories = $order->orderHistories;
+        $statuses = Order::STATUS;
+        if(!empty($histories)){
+            $histories->map(function ($item) use($statuses){
+                if(isset($statuses[$item->status])){
+                    $item->status =  $statuses[$item->status];
+                }
 
-
-        return view('orders.edit',compact('order', 'partners','statuses'));
+            });
+        }
+        return view('orders.edit',compact('order', 'partners','statuses','histories'));
     }
 
     /**
@@ -86,8 +94,8 @@ class OrderController extends Controller
      */
     public function update(StoreOrder $request, $id)
     {
-       $order = Order::find($id);
-       $order->update(request(['client_email','partner_id']));
+       $order = Order::findOrFail($id);
+       $order->update(request(['client_email','partner_id','status']));
 
        return redirect('/orders');
     }

@@ -88,4 +88,28 @@
 
         </div>
 
+    <div>
+        <h2>История заказа</h2>
+
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th scope="col">Дата изменения</th>
+                <th scope="col">Email покупателя</th>
+                <th scope="col">Статус</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($histories as $history)
+                <tr>
+                    <td>{{$history->created_at}}</td>
+                    <td>{{$history->client_email}}</td>
+                    <td>{{$history->status}}</td>
+
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+
 @endsection

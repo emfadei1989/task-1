@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\OrderUpdated;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -10,6 +11,10 @@ class Order extends Model
         0 => 'Новый',
         10 => 'Подтвержден',
         20 => 'Завешен'
+    ];
+
+    protected $dispatchesEvents = [
+        'updated' => OrderUpdated::class
     ];
 
    protected $fillable = ['client_email','partner_id', 'status'];
@@ -21,5 +26,9 @@ class Order extends Model
 
     public function orderProducts(){
         return $this->hasMany('App\OrderProduct');
+    }
+
+    public function orderHistories(){
+        return $this->hasMany('App\OrderHistory');
     }
 }
