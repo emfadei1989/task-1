@@ -14,8 +14,9 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+console.log(111);
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('weather', require('./components/Weather.vue'));
 
 const app = new Vue({
     el: '#app'

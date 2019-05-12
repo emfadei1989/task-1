@@ -7,3 +7,10 @@
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+.top-line{
+  height: 20px;
+  overflow: hidden;
+  padding: 5px 0;
+  box-sizing: content-box;
+}

@@ -27,11 +27,7 @@
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
+                                        <li><a href="{{route('orders.edit',$order->id)}}">Редактировать</a></li>
                                     </ul>
                                 </div>
 
@@ -59,7 +55,7 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="5">
+                        <td colspan="6">
                             <ul class="pagination pull-right">
                                 {{$orders->links()}}
                             </ul>
@@ -70,5 +66,4 @@
             </div>
         </div>
     </section>
-
 @endsection

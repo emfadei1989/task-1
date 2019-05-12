@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrder;
 use App\Order;
+use App\Partner;
+use App\Services\YandexWeather;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -62,12 +65,16 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param Order $order
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Order $order)
     {
-        //
+        $partners = Partner::all();
+        $statuses = Order::STATUS;
+
+
+        return view('orders.edit',compact('order', 'partners','statuses'));
     }
 
     /**
@@ -77,9 +84,12 @@ class OrderController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreOrder $request, $id)
     {
-        //
+       $order = Order::find($id);
+       $order->update(request(['client_email','partner_id']));
+
+       return redirect('/orders');
     }
 
     /**

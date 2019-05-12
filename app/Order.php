@@ -12,6 +12,8 @@ class Order extends Model
         20 => 'Завешен'
     ];
 
+   protected $fillable = ['client_email','partner_id', 'status'];
+
     public function partner()
     {
         return $this->belongsTo('App\Partner');
