@@ -4,8 +4,7 @@ namespace App\Listeners;
 
 use App\Events\OrderUpdated;
 use App\OrderHistory;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+
 
 class SaveOrderUpdatedState
 {

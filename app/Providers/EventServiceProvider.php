@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\OrderUpdated;
+use App\Listeners\OrderCompleted;
 use App\Listeners\SaveOrderUpdatedState;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -20,7 +21,8 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         OrderUpdated::class => [
-            SaveOrderUpdatedState::class
+            SaveOrderUpdatedState::class,
+            OrderCompleted::class
         ]
     ];
 
