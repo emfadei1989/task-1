@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrder;
 use App\Order;
 use App\Partner;
-use App\Services\YandexWeather;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -17,17 +17,20 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = new Order();
-        $orders = $orders->paginate(10);
-        $statuses = Order::STATUS;
-        $orders->map(function ($item) use($statuses){
-            if(isset($statuses[$item->status])){
-                $item->status =  $statuses[$item->status];
-            }
 
-        });
+        $order = new Order();
+        $overdueOrders = $order->overdueOrders()->paginate(50);
+        $currentOrders = $order->currentOrders()->paginate(50);
+        $newOrders = $order->newOrders()->paginate(50);
+        $completedOrders = $order->completedOrders()->paginate(50);
 
-        return view('orders.index', compact('orders'));
+        $orders = compact('overdueOrders','currentOrders', 'newOrders', 'completedOrders');
+
+        array_map(function($item) use ($order){
+           return $order->convertStatusToString($item);
+        },$orders);
+
+        return view('orders.index_updated', compact('orders'));
     }
 
     /**
