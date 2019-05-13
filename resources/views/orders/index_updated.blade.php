@@ -4,14 +4,6 @@
     <section class="order_list">
         <div class="order_list">
             <div class="container">
-                <editable-field
-                        initial-input-type="number"
-                        initial-input-name="price"
-                        initial-input-value="111111"
-                        initial-url="/api/products/1"
-                        initial-method="patch"
-                >
-                </editable-field>
                 <h1>Заказы</h1>
 
 

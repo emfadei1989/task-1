@@ -100,14 +100,20 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($histories as $history)
+            @forelse($histories as $history)
                 <tr>
                     <td>{{$history->created_at}}</td>
                     <td>{{$history->client_email}}</td>
                     <td>{{$history->status}}</td>
 
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="3" class="text-center">
+                        Данные отсутствуют
+                    </td>
+                </tr>
+            @endforelse
             </tbody>
         </table>
     </div>
