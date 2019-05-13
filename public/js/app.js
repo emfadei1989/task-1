@@ -44794,7 +44794,7 @@ exports = module.exports = __webpack_require__(46)(false);
 
 
 // module
-exports.push([module.i, "\n#weather{\n    display: inline-block;\n}\n\n", ""]);
+exports.push([module.i, "\n#weather {\n    display: inline-block;\n}\n\n", ""]);
 
 // exports
 
@@ -45156,24 +45156,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      currentWeather: null
-    };
-  },
-  mounted: function mounted() {
-    var me = this;
+    data: function data() {
+        return {
+            currentTemp: null,
+            cityName: null
+        };
+    },
+    mounted: function mounted() {
+        var me = this;
 
-    axios.get('/weather').then(function (res) {
-      var data = res.data;
-      if (data.success && data.data) {
-
-        me.currentWeather = data.data.temp;
-      }
-    }).catch(function (err) {
-      console.log(err);
-    });
-  }
+        axios.get('/weather').then(function (res) {
+            var data = res.data;
+            if (data.success && data.data) {
+                me.currentTemp = data.data.temp;
+                me.cityName = data.data.name;
+            }
+        }).catch(function (err) {
+            console.log(err);
+        });
+    }
 });
 
 /***/ }),
@@ -45188,8 +45189,9 @@ var render = function() {
     "div",
     { staticClass: "d-inline-block", attrs: { id: "weather" } },
     [
-      _vm._v("\n    Температура: "),
-      _c("span", { domProps: { textContent: _vm._s(_vm.currentWeather) } }),
+      _c("span", { domProps: { textContent: _vm._s(_vm.cityName) } }),
+      _vm._v(". Температура: "),
+      _c("span", { domProps: { textContent: _vm._s(_vm.currentTemp) } }),
       _vm._v(";\n")
     ]
   )

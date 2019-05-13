@@ -49,6 +49,7 @@ class YandexWeather implements Weather
         }
         
         return [
+            'name' => $this->city->getName(),
             'temp' => "{$response->fact->temp} {$this->tempFormat}",
             'windSpeed' => "{$response->fact->wind_speed} {$this->windSpeedFormat}",
             'pressure' => "{$response->fact->pressure_mm} {$this->pressureFormat}",
