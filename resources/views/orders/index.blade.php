@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <section class="order_list">
         <div class="order_list">
             <div class="container">

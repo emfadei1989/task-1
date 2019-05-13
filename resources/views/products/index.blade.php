@@ -33,7 +33,17 @@
                         <th scope="row">{{$product->id}}</th>
                         <td>{{$product->name}}</td>
                         <td>{{$product->vendor->name}}</td>
-                        <td>{{$product->price}}</td>
+                        <td>
+
+                            <editable-field
+                                    initial-input-type="number"
+                                    initial-input-name="price"
+                                    initial-input-value="{{$product->price}}"
+                                    initial-url="/api/products/{{$product->id}}"
+                                    initial-method="patch"
+                            >
+                            </editable-field>
+                        </td>
 
                 </tr>
                 @empty
