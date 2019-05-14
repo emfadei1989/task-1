@@ -45165,7 +45165,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         var me = this;
 
-        axios.get('/weather').then(function (res) {
+        axios.get('/api/weather').then(function (res) {
             var data = res.data;
             if (data.success && data.data) {
                 me.currentTemp = data.data.temp;
@@ -45327,7 +45327,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             editMode: false,
             inputValue: this.initialInputValue,
             inputName: this.initialInputName
-
         };
     },
 

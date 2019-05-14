@@ -16,4 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::patch('/products/{product}','api\ProductController@update');
+Route::patch('/products/{product}', 'API\ProductController@update');
+
+Route::get('/weather', 'API\WeatherController@currentWeather');

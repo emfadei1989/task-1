@@ -33,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
             return new YandexWeather(
                 new \GuzzleHttp\Client(),
                 config('weather.yandex.apiKey'),
+                config('weather.yandex.url'),
                 $city
             );
         });

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrder;
 use App\Order;
 use App\Partner;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -17,18 +16,17 @@ class OrderController extends Controller
      */
     public function index()
     {
-
         $order = new Order();
         $overdueOrders = $order->overdueOrders()->paginate(50);
         $currentOrders = $order->currentOrders()->paginate(50);
         $newOrders = $order->newOrders()->paginate(50);
         $completedOrders = $order->completedOrders()->paginate(50);
 
-        $orders = compact('overdueOrders','currentOrders', 'newOrders', 'completedOrders');
+        $orders = compact('overdueOrders', 'currentOrders', 'newOrders', 'completedOrders');
 
-        array_map(function($item) use ($order){
-           return $order->convertStatusToString($item);
-        },$orders);
+        array_map(function ($item) use ($order) {
+            return $order->convertStatusToString($item);
+        }, $orders);
 
         return view('orders.index_updated', compact('orders'));
     }
@@ -74,33 +72,33 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         $partners = Partner::all();
-        $statuses = Order::STATUS;
         $histories = $order->orderHistories;
         $statuses = Order::STATUS;
-        if(!empty($histories)){
-            $histories->map(function ($item) use($statuses){
-                if(isset($statuses[$item->status])){
-                    $item->status =  $statuses[$item->status];
+        if (!empty($histories)) {
+            $histories->map(function ($item) use ($statuses) {
+                if (isset($statuses[$item->status])) {
+                    $item->status = $statuses[$item->status];
                 }
 
             });
         }
-        return view('orders.edit',compact('order', 'partners','statuses','histories'));
+
+        return view('orders.edit', compact('order', 'partners', 'statuses', 'histories'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param StoreOrder $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(StoreOrder $request, $id)
     {
-       $order = Order::findOrFail($id);
-       $order->update(request(['client_email','partner_id','status']));
+        $order = Order::findOrFail($id);
+        $order->update(request(['client_email', 'partner_id', 'status']));
 
-       return redirect('/orders');
+        return redirect('/orders');
     }
 
     /**

@@ -3,12 +3,12 @@
         <i v-on:click="toggleEdit()" class="fa fa-edit"></i>
         <div class="content">
 
-            <div v-show="!editMode" class="field"  v-text="inputValue">
+            <div v-show="!editMode" class="field" v-text="inputValue">
 
             </div>
 
             <div v-show="editMode" class="input">
-                <input   :name="initialInputName" :type="initialInputType" v-model="inputValue">
+                <input :name="initialInputName" :type="initialInputType" v-model="inputValue">
             </div>
         </div>
     </div>
@@ -43,7 +43,6 @@
                 editMode: false,
                 inputValue: this.initialInputValue,
                 inputName: this.initialInputName
-
             }
         },
 
@@ -54,7 +53,7 @@
                     this.sendData();
                 }
             },
-            sendData:function () {
+            sendData: function () {
                 let me = this;
 
                 let inputName = me.initialInputName;
@@ -64,9 +63,9 @@
                 axios.request({
                     url: me.initialUrl,
                     method: me.initialMethod,
-                    data:sendData
+                    data: sendData
                 }).then(res => {
-                    if(!res.data.success){
+                    if (!res.data.success) {
                         alert('Произошла ошибка при обновлении объекта!');
                     }
                 }).catch(err => {

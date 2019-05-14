@@ -15,7 +15,7 @@
         mounted() {
             let me = this;
 
-            axios.get('/weather')
+            axios.get('/api/weather')
                 .then(res => {
                     let data = res.data;
                     if (data.success && data.data) {

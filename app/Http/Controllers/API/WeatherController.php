@@ -1,7 +1,8 @@
 <?php
-namespace App\Http\Controllers;
 
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Contracts\Weather;
 
 class WeatherController extends Controller
@@ -24,11 +25,11 @@ class WeatherController extends Controller
         if ($currentWeather) {
             return [
                 'success' => true,
-                'data' => $currentWeather
+                'data' => $currentWeather,
             ];
         } else {
             return [
-                'success' => false
+                'success' => false,
             ];
         }
     }

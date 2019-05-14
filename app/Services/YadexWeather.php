@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 
@@ -14,7 +15,10 @@ class YandexWeather implements Weather
 
     protected $pressureFormat = 'мм рт. ст.';
 
-    protected $url = 'https://api.weather.yandex.ru/v1/forecast';
+    /**
+     * @var string
+     */
+    protected $url;
     /**
      * @var string
      */
@@ -29,12 +33,13 @@ class YandexWeather implements Weather
     protected $httpClient;
 
 
-    public function __construct(ClientInterface $httpClient, string $apiKey, City $city)
+    public function __construct(ClientInterface $httpClient, string $apiKey, string $url, City $city)
     {
         $this->apiKey = $apiKey;
         $this->city = $city;
         $this->httpClient = $httpClient;
         $this->transformFormat();
+        $this->url = $url;
     }
 
     /**
@@ -47,7 +52,7 @@ class YandexWeather implements Weather
         } catch (\Exception $e) {
             return null;
         }
-        
+
         return [
             'name' => $this->city->getName(),
             'temp' => "{$response->fact->temp} {$this->tempFormat}",
@@ -66,13 +71,14 @@ class YandexWeather implements Weather
      */
     protected function getWeatherData(float $lat, float $lon)
     {
-        $url = $this->url . '?lat=' . $this->city->getLat() . '&lon=' . $this->city->getLon();
+        $url = $this->url.'?lat='.$this->city->getLat().'&lon='.$this->city->getLon();
         $headers = ['X-Yandex-API-Key' => $this->apiKey];
         try {
             $response = $this->httpClient->request('GET', $url, ['headers' => $headers]);
         } catch (\GuzzleHttp\Exception\GuzzleException $exception) {
             throw new \Exception($exception->getMessage(), $exception->getCode());
         }
+
         return json_decode($response->getBody()->getContents());
     }
 

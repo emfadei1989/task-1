@@ -78,9 +78,9 @@ class Order extends Model
     {
         $statuses = self::STATUS;
 
-        return $orders->map(function ($item) use($statuses){
-            if(isset($statuses[$item->status])){
-                $item->status =  $statuses[$item->status];
+        return $orders->map(function ($item) use ($statuses) {
+            if (isset($statuses[$item->status])) {
+                $item->status = $statuses[$item->status];
             }
         });
     }

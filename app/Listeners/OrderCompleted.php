@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: f.emelyanov
- * Date: 13.05.2019
- * Time: 11:38
- */
 
 namespace App\Listeners;
 
@@ -34,19 +28,19 @@ class OrderCompleted
     /**
      * Handle the event.
      *
-     * @param  OrderUpdated  $event
+     * @param  OrderUpdated $event
      * @return void
      */
     public function handle(OrderUpdated $event)
     {
         $this->order = $event->order;
         $status = $this->order->status;
-
-        if($status == 20){
+        //if status order status is completed
+        if ($status == 20) {
             $partner = $this->order->partner;
 
-            $vendors = $this->order->orderProducts->map(function ($item){
-               return $item->product->vendor;
+            $vendors = $this->order->orderProducts->map(function ($item) {
+                return $item->product->vendor;
             });
 
             $partner->notify(new OrderCompletedNotification($this->order));

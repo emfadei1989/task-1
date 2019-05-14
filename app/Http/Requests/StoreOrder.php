@@ -25,10 +25,11 @@ class StoreOrder extends FormRequest
     public function rules()
     {
         $statuses = array_keys(Order::STATUS);
+
         return [
             'client_email' => 'required|email',
             'partner_id' => 'required',
-            'status' => 'required|in:' . implode(',', $statuses)
+            'status' => 'required|in:'.implode(',', $statuses),
         ];
     }
 }

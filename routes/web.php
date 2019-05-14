@@ -16,5 +16,3 @@ Route::get('/', function () {
 });
 Route::resource('orders', 'OrderController');
 Route::resource('products', 'ProductController');
-
-Route::get('/weather','WeatherController@currentWeather');
